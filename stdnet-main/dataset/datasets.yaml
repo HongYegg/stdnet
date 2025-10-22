@@ -1,0 +1,80 @@
+"""
+dataset split information, following the paper:
+  Dynamic Context-Sensitive Filtering Network for Video Salient Object Detection, ICCV 2021,  
+  code link: https://github.com/Roudgers/DCFNet
+
+But you probably do not need that, the list files are already here in ./dataset
+List files were created via running generate_data_lst.py
+"""
+
+
+DUTS-TR:
+    image_dir: sod/DUTS-TR/images
+    label_dir: sod/DUTS-TR/GT
+    image_ext: .jpg
+    label_ext: .png
+
+
+# DAVSOD Dataset
+DAVSOD:
+    image_dir: Imgs
+    label_dir: GT_object_level
+    image_ext: .png
+    label_ext: .png
+    video_split:
+        train: vsod/DAVSOD_Training_Set
+        val: vsod/DAVSOD_Validation_Set
+        test: vsod/DAVSOD_Test_Set_Easy_35
+
+# TIP18: A Benchmark Dataset and Saliency-Guided Stacked Autoencoders for Video-Based Salient Object Detection
+# url: http://cvteam.net/projects/TIP18-VOS/VOS.html
+VOS:
+    image_dir: vsod/VOS/JPEGImages
+    label_dir: vsod/VOS/Annotations
+    image_ext: .jpg
+    label_ext: .png
+    video_split:
+        train: ['1', '102', '103', '104', '107', '11', '111', '112', '114', '115',
+                '117', '118', '119', '12', '123', '124', '125', '126', '127', '130',
+                '131', '143', '145', '146', '147', '15', '156', '164', '17', '171',
+                '176', '192', '197', '198', '199', '2', '20', '200', '201', '202',
+                '205', '206', '207', '212', '215', '216', '217', '22', '220', '221',
+                '222', '225', '226', '229', '23', '230', '231', '233', '235', '236',
+                '25', '250', '251', '252', '255', '256', '257', '258', '259', '26',
+                '261', '262', '263', '265', '267', '268', '27', '270', '271', '272',
+                '273', '275', '276', '30', '32', '33', '34', '35', '38', '4', '40',
+                '44', '45', '46', '48', '50', '51', '52', '53', '55', '6', '61', '64',
+                '66', '67', '69', '70', '71', '73', '78', '80', '81', '83', '87', '88',
+                '9', '90', '96', '99']
+        val: ['10', '101', '105', '109', '113', '120', '13', '133', '14', '148', '158',
+                '18', '180', '196', '203', '204', '208', '209', '213', '219', '223', '228',
+                '24','260', '269', '28', '31', '37', '39', '5', '57', '62', '7', '72', '77',
+                '84', '92','94', '95', '97']
+        test: ['100', '106', '108', '110', '121', '132', '134', '16', '172', '189', '19',
+                '194', '195', '21', '210', '211', '214', '224', '227', '232', '254', '264',
+                '266', '274', '29', '3', '36', '42', '43', '47', '49', '58', '65', '68', '74',
+                '76', '8', '85', '93', '98']
+
+# DAVIS 2016 Dataset: Densely Annotated VIdeo Segmentation
+# We take 8 videos from the original training set as a validation set
+# url: https://davischallenge.org/
+DAVIS2016:
+    image_dir: vsod/DAVIS/**/Imgs
+    label_dir: vsod/DAVIS/**/ground-truth
+    image_ext: .jpg
+    label_ext: .png
+    video_split:
+        train: ['bear', 'bmx-bumps', 'boat', 'breakdance-flare',
+                    'bus', 'car-turn', 'dance-jump', 'dog-agility',
+                    'drift-turn', 'elephant', 'flamingo', 'hike',
+                    'hockey', 'horsejump-low', 'kite-walk', 'lucia',
+                    'mallard-fly', 'motocross-bumps', 'motorbike',
+                    'paragliding', 'rhino', 'rollerblade']
+        val: ['scooter-gray', 'soccerball', 'stroller', 'surf', 'swing', 'tennis',
+                    'train', 'drift-straight']
+        test: ['blackswan', 'bmx-trees', 'breakdance', 'camel',
+                    'car-roundabout', 'car-shadow', 'cows', 'dance-twirl',
+                    'dog', 'drift-chicane', 'drift-straight', 'goat',
+                    'horsejump-high', 'kite-surf', 'libby', 'motocross-jump',
+                    'paragliding-launch', 'parkour', 'scooter-black',
+                    'soapbox']
