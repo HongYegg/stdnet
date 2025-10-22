@@ -1,23 +1,40 @@
 name: Unzip in repo
+
 on:
   workflow_dispatch:
+
+# 明确给 token 写权限，避免 403 push 被拒
+permissions:
+  contents: write
 
 jobs:
   unzip:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout with LFS
+        uses: actions/checkout@v4
         with:
           lfs: true
+
+      - name: Enable Git LFS filters
+        run: |
+          git lfs install
+          git lfs version
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Unzip
         run: |
+          if [ ! -f stdnet-main.zip ]; then
+            echo "stdnet-main.zip not found at repo root" && exit 1
+          fi
           unzip -o stdnet-main.zip -d .
-          # 如果不想保留zip，下一行取消注释
-          # rm stdnet-main.zip
+          # 如果不想保留 zip，下一行解除注释
+          # rm -f stdnet-main.zip
+
       - name: Commit & push
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "unzip stdnet-main.zip" || echo "no changes"
+          # 没有变化时让这步不失败
+          git commit -m "unzip stdnet-main.zip" || echo "no changes to commit"
           git push
